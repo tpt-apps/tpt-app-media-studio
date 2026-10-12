@@ -1,0 +1,135 @@
+# TPT App — Offline AI Media Studio
+
+**Repository:** `tpt-app-media-studio`  
+**Codename:** Media  
+**License:** Dual MIT OR Apache-2.0  
+**Status:** Design  
+
+**Primary foundation crates used:**  
+`tpt-kinetix` · `tpt-cadence` · `tpt-visual` · `tpt-voice` · `tpt-gpu` · `tpt-appfront` · `tpt-simd` · light use of `tpt-crypto` and `tpt-primitives`
+
+---
+
+## 1. Purpose & Vision
+
+A complete offline desktop media production and processing suite that is memory-safe, high-performance, and free of cloud dependencies.
+
+It unifies video/audio processing, speech tools, GPU-accelerated effects, and light AI assistance into a single native application that never needs to phone home.
+
+Target users: video editors, archivists, podcasters, researchers, and technical users who want reliable, private, high-performance media tools without subscriptions or opaque C/C++ stacks.
+
+The same codebase is released as open source (MIT OR Apache-2.0) and packaged as convenient pre-built binaries sold on Gumroad.
+
+---
+
+## 2. Problem Statement
+
+Existing media tools force uncomfortable trade-offs:
+
+- Professional suites are expensive, subscription-based, and increasingly cloud-tied
+- Open-source tools (FFmpeg GUIs, HandBrake, etc.) are powerful but often fragile, inconsistent, or built on large unsafe codebases
+- AI features almost always require cloud APIs
+- Moving between audio, video, speech and effects tools creates friction and quality loss
+
+There is no polished, fully offline, memory-safe alternative that covers the full local media workflow.
+
+---
+
+## 3. Solution Overview
+
+| Capability                  | Source Repo(s)              | Role                                              |
+|-----------------------------|-----------------------------|---------------------------------------------------|
+| Core media processing       | tpt-kinetix                 | Transcoding, filtering, analysis, batch pipelines |
+| Audio codecs & processing   | tpt-cadence                 | Decode/encode, real-time capable audio            |
+| Video / visual effects      | tpt-visual                  | Compositing, colour, GPU effects                  |
+| Speech                      | tpt-voice                   | Transcription, isolation, diarization, editing    |
+| GPU compute                 | tpt-gpu                     | Acceleration for effects, inference, heavy ops    |
+| UI                          | tpt-appfront                | Unified native desktop interface                  |
+| Low-level performance       | tpt-simd                    | Portable SIMD kernels                             |
+
+Users work with projects that can contain video, audio, speech tracks and effect stacks. All processing happens locally. Optional light AI features (transcription, simple enhancement, etc.) also run on-device.
+
+---
+
+## 4. Core Features
+
+### MVP (v1.0)
+
+- Import / export common video and audio formats
+- Timeline-based editing (cut, trim, basic transitions)
+- Batch transcoding and processing pipelines
+- Audio tools (normalisation, isolation, basic effects)
+- Speech transcription and simple text-based editing of audio
+- GPU-accelerated effects where available
+- Project save/load with local Keystone or simple file-based storage
+- Fully offline operation
+- Native desktop binaries (Windows, macOS, Linux)
+- Export of final renders and project packages
+
+### Later versions (no commitment)
+
+- More advanced colour grading and compositing
+- Stronger on-device AI models
+- Multi-track advanced editing
+- Scriptable batch pipelines / CLI mode
+- Hardware encoder integration improvements
+
+---
+
+## 5. Licensing & Dependency Rules
+
+- Application is dual-licensed MIT OR Apache-2.0.
+- All dependencies must be compatible with both MIT and Apache-2.0 (no Apache-only crates).
+- Foundation crates already under dual licence are used directly.
+
+---
+
+## 6. Security & Privacy Model
+
+- All media and projects stay on the user’s machine.
+- No telemetry, no automatic uploads, no mandatory accounts.
+- Optional AI features run locally only.
+- Project packages can be encrypted on export if desired.
+
+---
+
+## 7. Distribution Model
+
+1. **Open Source**  
+   Full source available under MIT OR Apache-2.0. Anyone can build it.
+
+2. **Gumroad**  
+   Pre-built, signed binaries + installer sold as a one-time purchase.  
+   No updates are promised.  
+   Purchasers may submit approved error reports that may be considered for a future major release.
+
+Buyers do not need to know the source is open.
+
+---
+
+## 8. Non-Goals (v1)
+
+- Cloud rendering or collaboration service
+- Full replacement for high-end Hollywood finishing tools on day one
+- Guaranteed ongoing updates or support
+- Mobile application
+- Every possible codec or effect on day one
+
+---
+
+## 9. Success Criteria
+
+- A user can import media, perform common edits and exports, and transcribe speech without any internet connection
+- Performance is competitive with existing FFmpeg-based tools while remaining memory-safe
+- The application feels like a coherent professional tool rather than a collection of utilities
+- The same codebase cleanly serves both open-source builders and Gumroad customers
+
+---
+
+## 10. Open Questions
+
+- Exact project file format
+- How much timeline editing depth to include in MVP vs leave for later
+- Preferred on-device model strategy for speech (bundled vs user-provided GGUF)
+- Desktop shell choice (pure AppFront native vs thin Tauri wrapper)
+- Binary size targets (especially with optional models)

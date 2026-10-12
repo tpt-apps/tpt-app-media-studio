@@ -1,0 +1,37 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock.bak
+
+# Build / release output
+/dist/
+/out/
+*.exe
+*.dll
+*.pdb
+
+# Models and media (large, user-provided)
+*.gguf
+*.onnx
+*.mp4
+*.mkv
+*.mov
+*.wav
+*.flac
+
+# Local project data and secrets
+*.keystone
+*.key
+.env
+.env.*
+*.log
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code local settings
+.claude/settings.local.json
